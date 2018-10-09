@@ -2,6 +2,7 @@ import sys
 import os
 import re
 import openpyxl
+from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import *
 from PyQt5.QtGui import * 
 from PyQt5.QtWidgets import *
@@ -65,6 +66,21 @@ class Fiskal(QMainWindow, fiskal_gui.Ui_MainWindow):
                 os.system("АПП_ФН.xlsx")
         elif resp == QMessageBox.No:
             pass
+
+    def openMenu(self, position): # Формируем контекстное меню
+        menu = QtWidgets.QMenu()
+        addDes = QtWidgets.QAction('Удалить', menu)
+        addDes.triggered.connect(self.del_current)
+        menu.addAction(addDes)
+        menu.exec_(self.listWidget.viewport().mapToGlobal(position))
+
+    def del_current(self):
+        print("Типа что то удалил")
+
+
+
+
+
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     form = Fiskal()

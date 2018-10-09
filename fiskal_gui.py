@@ -24,6 +24,8 @@ class Ui_MainWindow(object):
         self.verticalLayout.addWidget(self.lineEdit)
         self.listWidget = QtWidgets.QListWidget(self.centralwidget)
         self.listWidget.setObjectName("listWidget")
+        self.listWidget.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
+        self.listWidget.customContextMenuRequested.connect(self.openMenu)
         self.verticalLayout.addWidget(self.listWidget)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
@@ -50,4 +52,3 @@ class Ui_MainWindow(object):
         self.pushButton.setText(_translate("MainWindow", "Экспорт"))
         self.pushButton_2.setText(_translate("MainWindow", "Выход"))
         self.statusBar.showMessage("Пока список заводских номеров пуст")
-
