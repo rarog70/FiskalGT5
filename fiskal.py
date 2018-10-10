@@ -68,18 +68,18 @@ class Fiskal(QMainWindow, fiskal_gui.Ui_MainWindow):
             pass
 
     def openMenu(self, position): # Формируем контекстное меню
-        menu = QtWidgets.QMenu()
-        addDes = QtWidgets.QAction('Удалить', menu)
-        addDes.triggered.connect(self.del_current)
-        menu.addAction(addDes)
-        menu.exec_(self.listWidget.viewport().mapToGlobal(position))
+        if self.listWidget.itemAt(position) != None:
+            menu = QtWidgets.QMenu()
+            addDes = QtWidgets.QAction('Удалить', menu)
+            addDes.triggered.connect(self.del_current)
+            menu.addAction(addDes)
+            menu.exec_(self.listWidget.viewport().mapToGlobal(position))
 
-    def del_current(self):
-        print("Типа что то удалил")
-
-
-
-
+    def del_current(self):  # Удаляем текущую запись
+        model = self.listWidget.model() 
+        for selectedItem in self.listWidget.selectedItems(): 
+            qIndex = self.listWidget.indexFromItem(selectedItem) 
+            model.removeRow(qIndex.row()) 
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
